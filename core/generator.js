@@ -42,13 +42,24 @@ module.exports = {
                     console.error(err)
                   } else {
                     console.log('success!');
+                  //  npm install --prefeix ./hello express
+                    child_process.exec(["npm install --prefix "+ "./" + projectname +" express"], function(err, out, code) {
+                      if (err instanceof Error) {
+                        throw err;
+                      }
+
+                    });
+
+                    // child_process.exec(["sh ./" + projectname + "/install.sh"], function(err, out, code) {
+                    //   if (err instanceof Error) {
+                    //     throw err;
+                    //   }
+                    //
+                    //
+                    // });
                     child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
                       if (err instanceof Error) {
                         throw err;
-                      } else {
-                        process.stderr.write(err);
-                        process.stdout.write(out);
-                        process.exit(code);
                       }
 
 
