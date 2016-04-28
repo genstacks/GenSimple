@@ -8,6 +8,7 @@ Version : 1.0
 //Module Dependencies
 var fs = require('fs-extra');
 var child_process = require('child_process');
+var path = require("path");
 
 module.exports = {
 
@@ -43,12 +44,28 @@ module.exports = {
                   } else {
                     console.log('success!');
                   //  npm install --prefeix ./hello express
-                    child_process.exec(["npm install --prefix "+ "./" + projectname +" express"], function(err, out, code) {
+                  // console.log(__filename);
+                  // var hello = path.dirname("./"projectname+"/insrall.sh");
+                  var currentDir = process.cwd();
+                    child_process.exec(["npm install --prefix ./" + projectname +" express"], function(err, out, code) {
                       if (err instanceof Error) {
                         throw err;
+                      }else{
+
+                        child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
+                          if (err instanceof Error) {
+                            throw err;
+                          }
+
+
+
+
+                        });
+
                       }
 
                     });
+                    console.log("Your AngularSimple App Is up And Running on http://localhost:5000");
 
                     // child_process.exec(["sh ./" + projectname + "/install.sh"], function(err, out, code) {
                     //   if (err instanceof Error) {
@@ -57,14 +74,8 @@ module.exports = {
                     //
                     //
                     // });
-                    child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
-                      if (err instanceof Error) {
-                        throw err;
-                      }
 
 
-                    });
-                    console.log("Your AngularSimple App Is up And Running on http://localhost:5000");
                   }
 
                 });
