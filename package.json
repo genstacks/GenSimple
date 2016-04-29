@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/genstacks/gensimple#readme",
   "devDependencies": {
-    "fs-extra": "^0.28.0"
+    "fs-extra": "0.28.0"
   }
 }
