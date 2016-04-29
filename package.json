@@ -1,6 +1,6 @@
 {
   "name": "gensimple",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generate Simple Project Template/Structure/Architecture Patterns with gensimple Node CLI module.",
   "main": "index.js",
   "bin": {
