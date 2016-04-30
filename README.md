@@ -4,7 +4,7 @@
 Generate Simple Project Template/Structure/Architecture Patterns with gensimple Node CLI module.
 -No More Complex Project Generators, You manage your project templates as you wish'
 
->Currently Supports on Linux Based OS's
+>Currently Supports only on Linux Based OS's
 
 ####GenSimple is currently work in Progress and Has only one Project Template which generates an AngularSimple Project Structure
 
