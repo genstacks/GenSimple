@@ -1,4 +1,7 @@
 # GenSimple
+
+==Currently Supports on Linux Based OS's==
+
 Generate Simple Project Template/Structure/Architecture Patterns with gensimple Node CLI module.
 -No More Complex Project Generators, You manage your project templates as you wish'
 
