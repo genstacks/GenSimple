@@ -9,6 +9,7 @@ Version : 1.0
 var fs = require('fs-extra');
 var child_process = require('child_process');
 var path = require("path");
+var packages = require("./packages");
 
 module.exports = {
 
@@ -33,7 +34,8 @@ module.exports = {
               // We now know that evrything is smooth
               else {
                 // console.log(__dirname);
-                var dirname = __dirname;
+                var dirname = path.resolve(__dirname);
+                // console.log(path.resolve(__dirname))
 
                 var dirstr = dirname.substr(dirname.lastIndexOf('/') + 1) + '$',
                   fixedurl = dirname.replace(new RegExp(dirstr), '');
@@ -42,27 +44,48 @@ module.exports = {
                   if (err) {
                     console.error(err)
                   } else {
-                    console.log('success!');
 
-                    var currentDir = process.cwd();
-                    console.log("Installing Dependencies...");
-                    child_process.exec(["npm install --prefix ./" + projectname + " express"], function(err, out, code) {
-                      if (err instanceof Error) {
-                        throw err;
-                      } else {
 
-                        console.log("Success ! Your AngularSimple App Is up And Running on http://localhost:5000");
-                        child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
-                          if (err instanceof Error) {
-                            console.log(err);
-                            throw err;
+                    var currentDir = process.cwd(), totdalPackageCount =packages.angularsimple.packages.length,
+                    installedPackageCount=0 ;
+
+
+                    for (var i = 0; i < packages.angularsimple.packages.length; i++) {
+
+
+                      var packagenpm = packages.angularsimple.packages[i];
+                      console.log("Installing Dependencies..." + packagenpm);
+                      child_process.exec(["npm install --prefix ./" + projectname + " " + packagenpm + ""], function(err, out, code) {
+                        if (err instanceof Error) {
+                          throw err;
+                        } else {
+                          installedPackageCount ++;
+                          if(totdalPackageCount == installedPackageCount){
+
+                            console.log("Success ! Your AngularSimple App Is up And Running on http://localhost:5000");
+                            child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
+                              if (err instanceof Error) {
+                                console.log(err);
+                                throw err;
+                              }
+
+                            });
                           }
+                        }
 
-                        });
+                      });
 
-                      }
 
-                    });
+
+                    }
+
+
+
+
+
+
+
+
 
 
 
