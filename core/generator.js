@@ -33,7 +33,8 @@ module.exports = {
               }
               // We now know that evrything is smooth
               else {
-                // console.log(__dirname);
+                //  console.log(__dirname);
+                //  console.log(__filename);
                 var dirname = path.resolve(__dirname);
                 // console.log(path.resolve(__dirname))
 
@@ -54,7 +55,7 @@ module.exports = {
 
 
                       var packagenpm = packages.angularsimple.packages[i];
-                      console.log("Installing Dependencies..." + packagenpm);
+                      console.log("Installing Dependency..." + packagenpm);
                       child_process.exec(["npm install --prefix ./" + projectname + " " + packagenpm + ""], function(err, out, code) {
                         if (err instanceof Error) {
                           throw err;
@@ -78,15 +79,6 @@ module.exports = {
 
 
                     }
-
-
-
-
-
-
-
-
-
 
 
                   }
