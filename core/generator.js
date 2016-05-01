@@ -33,13 +33,24 @@ module.exports = {
               }
               // We now know that evrything is smooth
               else {
-                //  console.log(__dirname);
-                //  console.log(__filename);
-                var dirname = path.resolve(__dirname);
-                // console.log(path.resolve(__dirname))
 
-                var dirstr = dirname.substr(dirname.lastIndexOf('/') + 1) + '$',
-                  fixedurl = dirname.replace(new RegExp(dirstr), '');
+                var os = process.platform;
+
+                var dirname = path.resolve(__dirname);
+
+
+                var dirstr;
+
+                if (os == "win32") {
+
+                  dirstr = dirname.substr(dirname.lastIndexOf('\\') + 1) + '$';
+                } else {
+                  dirstr = dirname.substr(dirname.lastIndexOf('/') + 1) + '$';
+                }
+
+
+                var fixedurl = dirname.replace(new RegExp(dirstr), '');
+
 
                 fs.copy(fixedurl + '/templates/angularsimple/', "./" + projectname + "", function(err) {
                   if (err) {
@@ -47,8 +58,9 @@ module.exports = {
                   } else {
 
 
-                    var currentDir = process.cwd(), totdalPackageCount =packages.angularsimple.packages.length,
-                    installedPackageCount=0 ;
+                    var currentDir = process.cwd(),
+                      totdalPackageCount = packages.angularsimple.packages.length,
+                      installedPackageCount = 0;
 
 
                     for (var i = 0; i < packages.angularsimple.packages.length; i++) {
@@ -60,8 +72,8 @@ module.exports = {
                         if (err instanceof Error) {
                           throw err;
                         } else {
-                          installedPackageCount ++;
-                          if(totdalPackageCount == installedPackageCount){
+                          installedPackageCount++;
+                          if (totdalPackageCount == installedPackageCount) {
 
                             console.log("Success ! Your AngularSimple App Is up And Running on http://localhost:5000");
                             child_process.exec(["node ./" + projectname + "/server.js"], function(err, out, code) {
